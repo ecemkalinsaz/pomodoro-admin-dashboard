@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 
 function MusicCard() {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
 
   const playlists = [
     { name: 'Lo-fi Beats', artist: 'Chill Vibes' },
     { name: 'Deep Focus', artist: 'Study Mix' },
     { name: 'Ambient Sounds', artist: 'Peaceful' }
   ]
+
+  const currentTrack = playlists[currentTrackIndex]
+
+  const handleNext = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % playlists.length)
+  }
 
   return (
     <div className="card music-card">
@@ -21,9 +28,10 @@ function MusicCard() {
           {isPlaying ? '⏸' : '▶'}
         </button>
         <div className="music-info">
-          <p className="music-title">Lo-fi Beats</p>
-          <p className="music-artist">Chill Vibes</p>
+          <p className="music-title">{currentTrack.name}</p>
+          <p className="music-artist">{currentTrack.artist}</p>
         </div>
+        <button className="music-next-btn" onClick={handleNext}>⏭</button>
       </div>
 
       <div className="playlist">
