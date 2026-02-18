@@ -7,6 +7,7 @@ import QuoteCard from './QuoteCard'
 import ScheduleCard from './ScheduleCard'
 import coffeeIcon from '../assets/coffee.png'
 import waterIcon from '../assets/water.png'
+import pencilIcon from '../assets/pencil.png'
 
 function Dashboard() {
   const [selectedPreset, setSelectedPreset] = useState('short')
@@ -14,7 +15,8 @@ function Dashboard() {
   const [coffeeCount, setCoffeeCount] = useState(0)
   const [waterCount, setWaterCount] = useState(0)
   const [lastSession, setLastSession] = useState(null)
-  const [userName] = useState('Ecem')
+  const [userName, setUserName] = useState('Ecem')
+  const [isEditingName, setIsEditingName] = useState(false)
 
   const getGreeting = () => {
     const hour = new Date().getHours()
@@ -68,7 +70,26 @@ function Dashboard() {
         <div className="header-top">
           <div className="greeting-section">
             <h1 className="greeting-title">
-              {getGreeting()}, <span className="user-name">{userName}</span>
+              {getGreeting()},{' '}
+              {isEditingName ? (
+                <input
+                  className="name-input"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  onBlur={() => setIsEditingName(false)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === 'Escape') setIsEditingName(false)
+                  }}
+                  autoFocus
+                />
+              ) : (
+                <span className="name-wrapper">
+                  <span className="user-name">{userName}</span>
+                  <button className="edit-name-btn" onClick={() => setIsEditingName(true)}>
+                    <img src={pencilIcon} alt="Edit name" className="pencil-icon" />
+                  </button>
+                </span>
+              )}
             </h1>
             <p className="greeting-subtitle">
               {getDayName()}, {getFormattedDate()} • <span className="focus-status">Focus Mode Active</span>

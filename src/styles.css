@@ -98,6 +98,47 @@ html {
   font-weight: 500;
 }
 
+.name-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.edit-name-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.edit-name-btn:hover {
+  opacity: 1;
+}
+
+.pencil-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.name-input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  padding: 0 0.2rem;
+  min-width: 60px;
+  width: auto;
+}
+
 /* ===========================
    CSS Grid Dashboard Layout
    =========================== */

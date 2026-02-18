@@ -12,6 +12,7 @@ A responsive, glassmorphic productivity dashboard built with React, Vite, and pl
 - **📅 Schedule**: Quick schedule overview
 - **🎨 Glassmorphism Design**: Modern UI with backdrop blur and semi-transparent cards
 - **🕐 Dynamic Greeting**: Time-based greeting (Good Morning / Afternoon / Evening)
+- **✏️ Editable Username**: Click the pencil icon next to the name to edit inline
 - **📱 Fully Responsive**: Desktop (3-column), Tablet (2-column), Mobile (1-column)
 
 ## 🚀 Tech Stack
@@ -107,9 +108,10 @@ npm run preview
 
 ### Dashboard (Parent)
 
-- Central state manager: tasks, counters, timer preset, session mode
+- Central state manager: tasks, counters, timer preset, session mode, username
 - Passes data and callback props down to child components
 - Renders header with dynamic time-based greeting via `new Date().getHours()`
+- Editable username: pencil icon toggles inline input, saved on Enter/Escape/blur
 
 ### TimerCard
 
