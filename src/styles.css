@@ -184,10 +184,10 @@ grid-template-rows: 1fr auto;
   min-height: 0;
 }
 
-/* Right column: 3 equal-height stacked cards */
+/* Right column: Music + Quote each 1fr, Schedule gets 2fr */
 .right {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr;
   gap: var(--space-lg);
 }
 
@@ -509,6 +509,7 @@ flex: 1;
   grid-column: span 1;
   min-height: 0;
   overflow: hidden;
+  padding: var(--space-md);
 }
 
 .music-player {
@@ -675,6 +676,8 @@ flex: 1;
   justify-content: center;
   min-height: 0;
   overflow: hidden;
+  padding: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .quote-text {
@@ -698,6 +701,80 @@ flex: 1;
 .schedule-card {
   grid-column: span 1;
   min-height: 0;
+  overflow: hidden;
+  padding: var(--space-md);
+  gap: var(--space-sm);
+}
+
+.schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.schedule-input-row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.schedule-input {
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 0;
+}
+
+.schedule-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+.schedule-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.schedule-input-time {
+  flex-shrink: 0;
+  width: 110px;
+  color: var(--text-secondary);
+}
+
+.schedule-input-time:hover {
+  color: var(--text-primary);
+}
+
+.schedule-input-time::-webkit-calendar-picker-indicator {
+  filter: brightness(0) invert(51%);
+  transition: filter 0.3s ease;
+}
+
+.schedule-input-time:hover::-webkit-calendar-picker-indicator {
+  filter: none;
+}
+
+
+.schedule-input:not(.schedule-input-time):not(.schedule-input-subtitle) {
+  flex: 1;
+}
+
+.schedule-input-subtitle {
+  width: 100%;
+}
+
+.schedule-item .task-delete {
+  color: rgba(239, 68, 68, 0.35);
+}
+
+.schedule-item .task-delete:hover {
+  color: #dc2626;
 }
 
 .schedule-list {

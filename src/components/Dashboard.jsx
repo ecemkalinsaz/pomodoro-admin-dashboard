@@ -11,12 +11,19 @@ import pencilIcon from '../assets/pencil.png'
 
 function Dashboard() {
   const [selectedPreset, setSelectedPreset] = useState('short')
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('tasks')
+    return saved ? JSON.parse(saved) : []
+  })
   const [coffeeCount, setCoffeeCount] = useState(0)
   const [waterCount, setWaterCount] = useState(0)
   const [lastSession, setLastSession] = useState(null)
   const [userName, setUserName] = useState('Ecem')
   const [isEditingName, setIsEditingName] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const getGreeting = () => {
     const hour = new Date().getHours()
