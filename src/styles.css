@@ -157,6 +157,7 @@ html {
 .right {
     height: 100%;
     min-height: 0;
+    min-width: 0;
 }
 
 /* Left column: vertical grid for Focus + Stats */
@@ -229,26 +230,62 @@ grid-template-rows: 1fr auto;
 @media (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     height: auto;
   }
+
   .focus, .tasks, .right {
     height: auto;
   }
+
   .stats-inner {
     grid-template-columns: 1fr 1fr;
   }
+
+  .right {
+    grid-column: span 1;
+    grid-template-rows: auto;
+  }
+
   .right-inner {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     height: auto;
   }
+
   .dashboard-wrapper {
     padding: var(--space-md);
   }
+
+  .dashboard-header {
+    margin-bottom: var(--space-md);
+  }
+
   .dashboard-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+  }
+
+  .greeting-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .pencil-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
+
+  .schedule-input-row {
+    flex-wrap: wrap;
+  }
+
+  .schedule-input-time {
+    width: 100%;
   }
 }
 
@@ -718,6 +755,11 @@ flex: 1;
   align-items: center;
 }
 
+.schedule-input-row .btn {
+  padding: var(--space-sm);
+  flex-shrink: 0;
+}
+
 .schedule-input {
   padding: var(--space-sm) var(--space-md);
   background: rgba(255, 255, 255, 0.6);
@@ -952,8 +994,7 @@ flex: 1;
   }
 
   .music-player {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
   }
 }
 
