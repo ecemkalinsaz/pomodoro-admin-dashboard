@@ -18,12 +18,18 @@ function Dashboard() {
   const [coffeeCount, setCoffeeCount] = useState(0)
   const [waterCount, setWaterCount] = useState(0)
   const [lastSession, setLastSession] = useState(null)
-  const [userName, setUserName] = useState('Ecem')
+  const [userName, setUserName] = useState(() => {
+    return localStorage.getItem('userName') || 'Ecem'
+  })
   const [isEditingName, setIsEditingName] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
+
+  useEffect(() => {
+    localStorage.setItem('userName', userName)
+  }, [userName])
 
   const getGreeting = () => {
     const hour = new Date().getHours()
