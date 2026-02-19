@@ -128,6 +128,7 @@ npm run preview
 - Auto-switches between focus and break modes
 - Calls parent `onSessionChange` callback when mode changes
 - Receives `selectedPreset` and `onPresetChange` from parent
+- Updates `document.title` with remaining time while running (e.g. `25:00 · Pomodoro`), resets to `Focus Dashboard` when paused
 
 ### TaskCard
 

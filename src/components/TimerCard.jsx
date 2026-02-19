@@ -24,6 +24,14 @@ function TimerCard({ selectedPreset, onPresetChange, onSessionChange }) {
   }, [selectedPreset])
 
   useEffect(() => {
+    if (isRunning) {
+      document.title = `${formatTime(remainingTime)} · ${currentMode === 'focus' ? 'Pomodoro' : 'Break'}`
+    } else {
+      document.title = 'Focus Dashboard'
+    }
+  }, [remainingTime, isRunning, currentMode])
+
+  useEffect(() => {
     if (!isRunning) return
 
     const interval = setInterval(() => {
