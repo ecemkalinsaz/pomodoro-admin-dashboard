@@ -7,7 +7,7 @@ A responsive, glassmorphic productivity dashboard built with React, Vite, and pl
 - **🎯 Focus Timer**: Pomodoro timer with focus/break modes (25/5 or 50/10 presets)
 - **✅ Task Management**: Add, complete, and delete tasks
 - **🎵 Music Player**: Play/pause toggle with playlist preview
-- **☕ Health Trackers**: Coffee and water intake counters
+- **☕ Health Trackers**: Coffee and water intake counters (persisted across sessions)
 - **💭 Inspiration**: Daily motivational quote
 - **📅 Schedule**: Quick schedule overview
 - **🎨 Glassmorphism Design**: Modern UI with backdrop blur and semi-transparent cards
@@ -17,7 +17,7 @@ A responsive, glassmorphic productivity dashboard built with React, Vite, and pl
 
 ## 🚀 Tech Stack
 
-- **React 18** - Functional components, useState, useEffect
+- **React 18** - Functional components, useState, useEffect, useLayoutEffect, useRef
 - **Vite** - Lightning-fast build tool
 - **Plain CSS** - CSS Grid, Flexbox, CSS Variables
 - **No Dependencies** - No UI frameworks (Tailwind, Bootstrap, etc.)
@@ -44,9 +44,15 @@ src/
 
 ### CSS Grid Layout
 
-- **Desktop** (>1024px): 3-column grid (`1fr 1.2fr 1fr`)
-- **Tablet** (≤1024px): 2-column grid — Focus + Tasks on top, Music/Quote/Schedule full-width in a 3-column row below
-- **Mobile** (≤768px): 1-column stacked layout
+- **Desktop** (>1100px): 3-column grid (`1fr 1.2fr 1fr`), fixed `82vh` height
+- **Desktop-edge** (1025–1100px): same 3-column layout, slightly reduced quote font size
+- **Tablet** (769–1024px): 2-column grid — Focus + Tasks on top, Music/Quote/Schedule full-width below
+- **Mobile** (≤768px): 1-column stacked, natural height
+
+### Interaction & Animation
+
+- Cards lift on hover with `translateY(-4px)` at `0.08s`
+- Buttons scale up on hover (`scale(1.08)`) and press down on click (`scale(0.94)`) at `0.06s / 0.03s`
 
 ### Glassmorphism Styling
 
@@ -113,7 +119,7 @@ npm run preview
 - Renders header with dynamic time-based greeting via `new Date().getHours()`
 - Editable username: pencil icon toggles inline input, saved on Enter/Escape/blur
 - Username input auto-sizes to content using a hidden mirror span + `useLayoutEffect`
-- Tasks and username persisted to `localStorage`
+- Tasks, username, coffee and water counts all persisted to `localStorage` in a single `useEffect`
 
 ### TimerCard
 

@@ -363,7 +363,7 @@ grid-template-rows: 1fr auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.08s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
@@ -1045,7 +1045,7 @@ flex: 1;
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: transform 0.06s ease;
   font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
@@ -1054,21 +1054,17 @@ flex: 1;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: scale(1.08);
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: scale(0.94);
+  transition-duration: 0.03s;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-primary) 0%, #3da066 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
 }
 
 .btn-secondary {

@@ -23,7 +23,7 @@ function Dashboard() {
   })
   const [lastSession, setLastSession] = useState(null)
   const [userName, setUserName] = useState(() => {
-    return localStorage.getItem('userName') || 'Ecem'
+    return localStorage.getItem('userName') || 'Your Name'
   })
   const [isEditingName, setIsEditingName] = useState(false)
   const nameInputRef = useRef(null)
@@ -37,19 +37,10 @@ function Dashboard() {
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
-
-  useEffect(() => {
     localStorage.setItem('userName', userName)
-  }, [userName])
-
-  useEffect(() => {
     localStorage.setItem('coffeeCount', coffeeCount)
-  }, [coffeeCount])
-
-  useEffect(() => {
     localStorage.setItem('waterCount', waterCount)
-  }, [waterCount])
+  }, [tasks, userName, coffeeCount, waterCount])
 
   const getGreeting = () => {
     const hour = new Date().getHours()
