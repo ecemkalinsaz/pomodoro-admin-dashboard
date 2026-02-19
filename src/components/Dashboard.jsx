@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import TimerCard from './TimerCard'
 import TaskCard from './TaskCard'
 import MusicCard from './MusicCard'
@@ -22,6 +22,14 @@ function Dashboard() {
     return localStorage.getItem('userName') || 'Ecem'
   })
   const [isEditingName, setIsEditingName] = useState(false)
+  const nameInputRef = useRef(null)
+  const nameMirrorRef = useRef(null)
+
+  useLayoutEffect(() => {
+    if (isEditingName && nameMirrorRef.current && nameInputRef.current) {
+      nameInputRef.current.style.width = nameMirrorRef.current.offsetWidth + 'px'
+    }
+  }, [userName, isEditingName])
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -85,16 +93,22 @@ function Dashboard() {
             <h1 className="greeting-title">
               {getGreeting()},{' '}
               {isEditingName ? (
-                <input
-                  className="name-input"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  onBlur={() => setIsEditingName(false)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === 'Escape') setIsEditingName(false)
-                  }}
-                  autoFocus
-                />
+                <>
+                  <span ref={nameMirrorRef} className="name-input-mirror" aria-hidden="true">
+                    {userName || '\u00A0'}
+                  </span>
+                  <input
+                    ref={nameInputRef}
+                    className="name-input"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    onBlur={() => setIsEditingName(false)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === 'Escape') setIsEditingName(false)
+                    }}
+                    autoFocus
+                  />
+                </>
               ) : (
                 <span className="name-wrapper">
                   <span className="user-name">{userName}</span>
