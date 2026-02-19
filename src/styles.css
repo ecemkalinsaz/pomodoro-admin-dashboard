@@ -378,6 +378,24 @@ grid-template-rows: 1fr auto;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card-title-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: contain;
+}
+
+.schedule-card .card-title-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.schedule-card .card-title {
+  gap: 0.1rem;
 }
 
 /* ===========================
@@ -396,12 +414,19 @@ grid-template-rows: 1fr auto;
   justify-content: center;
 }
 
+.timer-card .card-title {
+  justify-content: center;
+  align-self: stretch;
+}
+
 .timer-mode-label {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
 }
 
 .timer-circle-wrapper {

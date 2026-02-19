@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import pomodoroIcon from '../assets/pomodoro.png'
 
 const PRESETS = {
   short: { focus: 1500, break: 300 },
@@ -63,7 +64,9 @@ function TimerCard({ selectedPreset, onPresetChange, onSessionChange }) {
       <h2 className="card-title">Focus Session</h2>
 
       <div className="timer-mode-label">
-        {currentMode === 'focus' ? '🎯 Focus' : '☕ Break'}
+        {currentMode === 'focus' ? (
+          <><img src={pomodoroIcon} alt="Pomodoro" className="card-title-icon" /> Pomodoro</>
+        ) : '☕ Break'}
       </div>
 
       <div className="timer-circle-wrapper">

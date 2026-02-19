@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import calendarIcon from '../assets/calendar.png'
 
 const COLORS = ['#48bb78', '#f6ad55', '#9f7aea', '#63b3ed', '#fc8181', '#68d391']
 
@@ -57,7 +58,10 @@ function ScheduleCard() {
 
   return (
     <div className="card schedule-card">
-      <h2 className="card-title">📅 Schedule</h2>
+      <h2 className="card-title">
+        <img src={calendarIcon} alt="Schedule" className="card-title-icon" />
+        Schedule
+      </h2>
 
       <div className="schedule-form">
         <div className="schedule-input-row">
