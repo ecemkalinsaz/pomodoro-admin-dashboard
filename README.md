@@ -112,6 +112,8 @@ npm run preview
 - Passes data and callback props down to child components
 - Renders header with dynamic time-based greeting via `new Date().getHours()`
 - Editable username: pencil icon toggles inline input, saved on Enter/Escape/blur
+- Username input auto-sizes to content using a hidden mirror span + `useLayoutEffect`
+- Tasks and username persisted to `localStorage`
 
 ### TimerCard
 
@@ -130,8 +132,10 @@ npm run preview
 
 ### MusicCard
 
-- UI-only component with local `isPlaying` state
-- Play/pause button with pulse animation
+- Plays local MP3 files via the Web Audio API (`<audio>` element)
+- Play/pause toggle with animated pulse on playing state
+- Next track button (desktop only)
+- Playlist UI with active track highlight
 - Text overflow handled with ellipsis for narrow viewports
 
 ### CounterCard
@@ -140,24 +144,35 @@ npm run preview
 - Increment/decrement buttons
 - Receives state and callbacks from parent
 
-### QuoteCard & ScheduleCard
+### QuoteCard
 
-- Static content display components
+- Curated pool of 40 motivational quotes (design, engineering, productivity)
+- Randomly selects a quote on load; refresh button cycles to a new one (never repeats consecutively)
+
+### ScheduleCard
+
+- Add schedule items with time, title, and optional details
+- Items sorted by time automatically
+- Delete individual entries
+- Persisted to `localStorage`
 
 ## 🔄 React Patterns Used
 
 1. **useState**: Managing component state (timer, tasks, counters)
-2. **useEffect**: Timer interval and cleanup
-3. **Props**: Parent-to-child data flow
-4. **Callbacks**: Child-to-parent communication (lifting state up)
-5. **Controlled Components**: Form inputs with state management
+2. **useEffect**: Timer interval, cleanup, and localStorage sync
+3. **useLayoutEffect**: Synchronous DOM measurement before paint (mirror span for username input width)
+4. **useRef**: Direct DOM access for input focus and width measurement
+5. **Props**: Parent-to-child data flow
+6. **Callbacks**: Child-to-parent communication (lifting state up)
+7. **Controlled Components**: Form inputs with state management
 
 ## 🎨 Responsive Breakpoints
 
 ```
-Desktop:  3 columns (default, width > 1024px)
-Tablet:   2 columns top + full-width bottom row (≤1024px)
-Mobile:   1 column stacked (≤768px)
+Desktop:       3 columns, fixed 82vh grid height (width > 1100px)
+Desktop-edge:  3 columns, slightly reduced quote font (1025–1100px)
+Tablet:        2 columns top + full-width bottom row (769–1024px)
+Mobile:        1 column stacked, natural height (≤768px)
 ```
 
 ## ✅ Acceptance Criteria
