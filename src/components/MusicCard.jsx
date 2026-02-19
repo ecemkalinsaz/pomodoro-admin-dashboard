@@ -1,20 +1,73 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+
+const TRACKS = [
+  { name: 'Lofi Chill Music', artist: 'Chill Vibes',    url: '/fassounds-good-night-lofi-cozy-chill-music-160166.mp3' },
+  { name: 'Ambient Sounds',   artist: 'Autumn Ambient', url: '/soundreality-autumn-ambient-420193.mp3' },
+]
 
 function MusicCard() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
 
-  const playlists = [
-    { name: 'Lo-fi Beats', artist: 'Chill Vibes' },
-    { name: 'Deep Focus', artist: 'Study Mix' },
-    { name: 'Ambient Sounds', artist: 'Peaceful' }
-  ]
+  const audioRef = useRef(null)
 
-  const currentTrack = playlists[currentTrackIndex]
+  const stopAll = () => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.src = ''
+      audioRef.current = null
+    }
+  }
+
+  const playTrack = (track) => {
+    const audio = new Audio(track.url)
+    audio.loop = true
+    audio.play().catch(() => {})
+    audioRef.current = audio
+  }
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      stopAll()
+      setIsPlaying(false)
+    } else {
+      playTrack(TRACKS[currentTrackIndex])
+      setIsPlaying(true)
+    }
+  }
 
   const handleNext = () => {
-    setCurrentTrackIndex((prev) => (prev + 1) % playlists.length)
+    const wasPlaying = isPlaying
+    stopAll()
+    const next = (currentTrackIndex + 1) % TRACKS.length
+    setCurrentTrackIndex(next)
+    if (wasPlaying) {
+      playTrack(TRACKS[next])
+      setIsPlaying(true)
+    } else {
+      setIsPlaying(false)
+    }
   }
+
+  const handleSelectTrack = (idx) => {
+    if (idx === currentTrackIndex) return
+    const wasPlaying = isPlaying
+    stopAll()
+    setCurrentTrackIndex(idx)
+    if (wasPlaying) {
+      playTrack(TRACKS[idx])
+      setIsPlaying(true)
+    } else {
+      setIsPlaying(false)
+    }
+  }
+
+
+  useEffect(() => {
+    return () => { stopAll() }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const currentTrack = TRACKS[currentTrackIndex]
 
   return (
     <div className="card music-card">
@@ -23,7 +76,7 @@ function MusicCard() {
       <div className="music-player">
         <button
           className={`play-btn ${isPlaying ? 'playing' : ''}`}
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={handlePlayPause}
         >
           {isPlaying ? '⏸' : '▶'}
         </button>
@@ -35,9 +88,13 @@ function MusicCard() {
       </div>
 
       <div className="playlist">
-        {playlists.map((playlist, idx) => (
-          <div key={idx} className="playlist-item">
-            <span className="playlist-name">{playlist.name}</span>
+        {TRACKS.map((track, idx) => (
+          <div
+            key={idx}
+            className={`playlist-item ${idx === currentTrackIndex ? 'active' : ''}`}
+            onClick={() => handleSelectTrack(idx)}
+          >
+            <span className="playlist-name">{track.name}</span>
           </div>
         ))}
       </div>
