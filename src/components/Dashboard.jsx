@@ -15,8 +15,12 @@ function Dashboard() {
     const saved = localStorage.getItem('tasks')
     return saved ? JSON.parse(saved) : []
   })
-  const [coffeeCount, setCoffeeCount] = useState(0)
-  const [waterCount, setWaterCount] = useState(0)
+  const [coffeeCount, setCoffeeCount] = useState(() => {
+    return parseInt(localStorage.getItem('coffeeCount')) || 0
+  })
+  const [waterCount, setWaterCount] = useState(() => {
+    return parseInt(localStorage.getItem('waterCount')) || 0
+  })
   const [lastSession, setLastSession] = useState(null)
   const [userName, setUserName] = useState(() => {
     return localStorage.getItem('userName') || 'Ecem'
@@ -38,6 +42,14 @@ function Dashboard() {
   useEffect(() => {
     localStorage.setItem('userName', userName)
   }, [userName])
+
+  useEffect(() => {
+    localStorage.setItem('coffeeCount', coffeeCount)
+  }, [coffeeCount])
+
+  useEffect(() => {
+    localStorage.setItem('waterCount', waterCount)
+  }, [waterCount])
 
   const getGreeting = () => {
     const hour = new Date().getHours()
