@@ -36,6 +36,19 @@ function MusicCard() {
     }
   }
 
+  const handlePrev = () => {
+    const wasPlaying = isPlaying
+    stopAll()
+    const prev = (currentTrackIndex - 1 + TRACKS.length) % TRACKS.length
+    setCurrentTrackIndex(prev)
+    if (wasPlaying) {
+      playTrack(TRACKS[prev])
+      setIsPlaying(true)
+    } else {
+      setIsPlaying(false)
+    }
+  }
+
   const handleNext = () => {
     const wasPlaying = isPlaying
     stopAll()
@@ -74,17 +87,20 @@ function MusicCard() {
       <h2 className="card-title">🎵 Music</h2>
 
       <div className="music-player">
-        <button
-          className={`play-btn ${isPlaying ? 'playing' : ''}`}
-          onClick={handlePlayPause}
-        >
-          {isPlaying ? '⏸' : '▶'}
-        </button>
         <div className="music-info">
           <p className="music-title">{currentTrack.name}</p>
           <p className="music-artist">{currentTrack.artist}</p>
         </div>
-        <button className="music-next-btn" onClick={handleNext}>⏭</button>
+        <div className="music-controls">
+          <button className="music-prev-btn" onClick={handlePrev}>⏮</button>
+          <button
+            className={`play-btn ${isPlaying ? 'playing' : ''}`}
+            onClick={handlePlayPause}
+          >
+            {isPlaying ? '⏸' : '▶'}
+          </button>
+          <button className="music-next-btn" onClick={handleNext}>⏭</button>
+        </div>
       </div>
 
       <div className="playlist">

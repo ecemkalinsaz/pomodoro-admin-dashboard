@@ -138,7 +138,7 @@ function Dashboard() {
           />
           <div className="stats-inner">
             <CounterCard
-              title="Coffee"
+              title="Coffees"
               count={coffeeCount}
               icon={coffeeIcon}
               iconSize="3.75rem"
@@ -146,7 +146,7 @@ function Dashboard() {
               onDecrement={() => setCoffeeCount(Math.max(0, coffeeCount - 1))}
             />
             <CounterCard
-              title="Glass"
+              title="Glasses"
               count={waterCount}
               icon={waterIcon}
               onIncrement={() => setWaterCount(waterCount + 1)}
