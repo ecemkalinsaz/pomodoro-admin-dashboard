@@ -200,10 +200,10 @@ grid-template-rows: 1fr auto;
   min-height: 0;
 }
 
-/* Right column: Music 1fr, Quote 1.5fr, Schedule 1.5fr */
+/* Right column: Music 1.3fr, Quote 1.1fr, Schedule 2fr */
 .right {
   display: grid;
-  grid-template-rows: 1fr 1.1fr 2fr;
+  grid-template-rows: 1.3fr 1.1fr 2fr;
   gap: var(--space-lg);
 }
 
