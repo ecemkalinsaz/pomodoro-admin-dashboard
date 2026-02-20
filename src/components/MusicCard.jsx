@@ -75,7 +75,6 @@ function MusicCard() {
     }
   }
 
-
   useEffect(() => {
     return () => { stopAll() }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps

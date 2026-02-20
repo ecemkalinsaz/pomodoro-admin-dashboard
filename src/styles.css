@@ -36,13 +36,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--text-primary);
   min-height: 100vh;
-background-image: url("./assets/background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 html {
@@ -164,15 +163,16 @@ html {
   grid-template-columns: 1fr 1.2fr 1fr;
   gap: var(--space-lg);
   align-items: stretch;
-  height: 82vh;
+  height: 88vh;
+  min-height: 700px;
 }
 
 .focus,
 .tasks,
 .right {
-    height: 100%;
-    min-height: 0;
-    min-width: 0;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
 }
 
 /* Left column: vertical grid for Focus + Stats */
@@ -200,19 +200,16 @@ grid-template-rows: 1fr auto;
   min-height: 0;
 }
 
-/* Right column: Music 1.3fr, Quote 1.1fr, Schedule 2fr */
+/* Right column: Music 1.05fr, Quote 1.3fr, Schedule 1.8fr */
 .right {
   display: grid;
-  grid-template-rows: 1.3fr 1.1fr 2fr;
+  grid-template-rows: 1.05fr 1.3fr 1.8fr;
   gap: var(--space-lg);
 }
 
 .right-inner {
   display: contents;
 }
-
-/* Grid Areas */
-
 
 
 /* Desktop (3 columns visible) - default above */
@@ -511,10 +508,10 @@ grid-template-rows: 1fr auto;
    =========================== */
 
 .task-card {
-flex: 1;
+  flex: 1;
   grid-column: span 1;
   height: auto;
-  min-height: 0;
+  min-height: 280px;
 }
 
 .task-progress {
@@ -748,12 +745,17 @@ flex: 1;
 }
 
 .playlist {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: var(--space-sm);
   overflow-y: auto;
   min-height: 0;
-  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .playlist {
+    display: flex;
+  }
 }
 
 .playlist-item {
@@ -845,8 +847,9 @@ flex: 1;
 .quote-card {
   grid-column: span 1;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  min-height: 0;
+  min-height: 160px;
   overflow: hidden;
   padding: var(--space-md);
   gap: var(--space-sm);
@@ -888,15 +891,10 @@ flex: 1;
 }
 
 .quote-text {
-  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
   font-style: italic;
   color: var(--text-primary);
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .quote-author {
@@ -905,14 +903,6 @@ flex: 1;
   font-weight: 500;
 }
 
-@media (max-width: 1100px) and (min-width: 1025px) {
-  .quote-text {
-    font-size: 0.85rem;
-  }
-  .quote-author {
-    font-size: 0.85rem;
-  }
-}
 
 @media (max-width: 1024px) and (min-width: 769px) {
   .quote-text {
@@ -929,7 +919,7 @@ flex: 1;
 
 .schedule-card {
   grid-column: span 1;
-  min-height: 0;
+  min-height: 280px;
   overflow: hidden;
   padding: var(--space-md);
   gap: var(--space-sm);
@@ -1134,6 +1124,7 @@ flex: 1;
   width: 6px;
 }
 
+
 .task-list::-webkit-scrollbar-track,
 .schedule-list::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.2);
@@ -1146,10 +1137,6 @@ flex: 1;
   border-radius: 3px;
 }
 
-.task-list::-webkit-scrollbar-thumb:hover,
-.schedule-list::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
-}
 
 /* ===========================
    Mobile Adjustments
